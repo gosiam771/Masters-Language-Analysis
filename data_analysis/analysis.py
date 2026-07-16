@@ -130,7 +130,7 @@ def similarity_comparison(files,texts,n,output_path):
           if k!=j:
             print("===============")
             wynik_similarity = similarity(texts[k], texts[j], n, True)
-            print(f'Tekst {k} vs. tekst {j}: wynik similarity: {wynik similarity}')
+            print(f'Tekst {k} vs. tekst {j}: wynik similarity: {wynik_similarity}')
 
             df_wyniki.append({"File 1": titles[k],
                 "File 2": titles[j],
