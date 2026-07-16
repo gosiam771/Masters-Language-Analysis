@@ -66,7 +66,7 @@ def no_words(dictionary_file, work_files):
 
     return output_text
 
-def similarity(tekst1, tekst2, n):
+def similarity(tekst1, tekst2, n,print_results = False):
 
     slowa1 = tekst1.split()
     slowa2 = tekst2.split()
@@ -89,10 +89,12 @@ def similarity(tekst1, tekst2, n):
         slowa2_top.append(word)
 
     wspolne = 0
+    wspolne_slowa = []
 
     for word in slowa1_top:
         if word in slowa2_top:
             wspolne += 1
+            wspolne_slowa.append(word)
 
     all_words = []
 
@@ -103,10 +105,18 @@ def similarity(tekst1, tekst2, n):
     for word in slowa2_top:
         if word not in all_words:
             all_words.append(word)
+    if print_results:
+        print(f'Liczba wspólnych:{wspolne}')
+        print(f'Lista wspolnych: {wspolne_slowa}')
+        print(f'Liczba całość:{len(all_words)}')
+        print(f'Lista całość:{all_words}')
+
 
     similarity = wspolne / len(all_words) * 100
 
+
     return round(similarity)
+
 
 def similarity_comparison(files,texts,n,output_path):
   titles = []
@@ -118,7 +128,9 @@ def similarity_comparison(files,texts,n,output_path):
   for k in range(len(texts)):
       for j in range(k+1,len(texts)):
           if k!=j:
-            wynik_similarity = similarity(texts[k], texts[j], n)
+            print("===============")
+            wynik_similarity = similarity(texts[k], texts[j], n, True)
+            print(f'Tekst {k} vs. tekst {j}: wynik similarity: {wynik similarity}')
 
             df_wyniki.append({"File 1": titles[k],
                 "File 2": titles[j],
